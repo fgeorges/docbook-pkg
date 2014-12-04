@@ -11,6 +11,6 @@ never check them in!
 As we do not want to modify DocBook sources, we cannot add the public
 import URIs within the source files themselves, so we cannot use
 [XProject](http://expath.org/modules/xproject/) and we need to provide
-an explicit expath-pkg.xml descriptor.  Look into `build.sh` for build
-instructions (normally just invoking `build.sh` in that directory is
-all you need).
+an explicit `expath-pkg.xml` descriptor.  Look into `build.sh` for
+build instructions (normally just invoking `build.sh` in the current
+directory is all you need).
