@@ -1,0 +1,15 @@
+<package xmlns='http://cxan.org/ns/package' id='docbook-schemas'>
+   <abstract>
+      Schemas for DocBook, 5.0.  Contains the DTDs, the W3C XML
+      Schemas, the RELAX NG (XML and compact syntax) and the
+      Schematron schemas.
+   </abstract>
+   <author id='ndw'>Norman Walsh</author>
+   <maintainer id='fgeorges'>Florent Georges</maintainer>
+   <category id='doctypes'>Document types</category>
+   <tag>docbook</tag>
+   <tag>xsd</tag>
+   <tag>relaxng</tag>
+   <tag>schematron</tag>
+   <tag>nvdl</tag>
+</package>
