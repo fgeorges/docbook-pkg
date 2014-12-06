@@ -24,8 +24,7 @@ fi
 
 ## Unzip it
 
-rm -rf garbage/docbook-*/
-rm -rf garbage/build/
+rm -rf garbage/*
 unzip "$zip" -d garbage/ >/dev/null
 
 src=`echo garbage/docbook-*/`
@@ -34,14 +33,13 @@ dest=garbage/build
 
 mkdir "$dest"
 mkdir "$dest/content"
-mkdir "$dest/content/rng"
-mkdir "$dest/content/xsd"
-cp rsrc/docbook-schemas-pkg.xml  "$dest/expath-pkg.xml"
-cp rsrc/docbook-schemas-cxan.xml "$dest/cxan.xml"
-cp "$src/docbook.nvdl"    "$dest/content/"
-cp "$src/sch/docbook.sch" "$dest/content/"
-cp "$src"/rng/docbook*    "$dest/content/rng/"
-cp "$src"/xsd/*.xsd       "$dest/content/xsd/"
+
+cp    rsrc/docbook-schemas-pkg.xml  "$dest/expath-pkg.xml"
+cp    rsrc/docbook-schemas-cxan.xml "$dest/cxan.xml"
+cp    "$src/docbook.nvdl"           "$dest/content/"
+cp    "$src/sch/docbook.sch"        "$dest/content/"
+cp -R "$src/rng/"                   "$dest/content/"
+cp -R "$src/xsd/"                   "$dest/content/"
 
 ( cd "$dest"; zip -r "docbook-schemas-${num}.xar" . )
 
