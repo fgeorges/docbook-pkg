@@ -1,0 +1,10 @@
+<package xmlns='http://cxan.org/ns/package' id='docbook-xsl'>
+   <abstract>
+      Stylesheets for DocBook.
+   </abstract>
+   <author id='ndw'>Norman Walsh</author>
+   <maintainer id='fgeorges'>Florent Georges</maintainer>
+   <category id='applications'>Applications</category>
+   <tag>docbook</tag>
+   <tag>xslt</tag>
+</package>
