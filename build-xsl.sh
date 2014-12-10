@@ -34,24 +34,76 @@ dest=garbage/build
 mkdir "$dest"
 mkdir "$dest/content"
 
-die "TODO: Build EXPATH-PKG.XML dynamically!"
+sed "s/{@VERSION}/$num/g" rsrc/docbook-xsl-cxan.xml > "$dest/cxan.xml"
+cp "$src/VERSION" "$dest/content/"
 
-cp    rsrc/docbook-xsl-pkg.xml  "$dest/expath-pkg.xml"
-cp    rsrc/docbook-xsl-cxan.xml "$dest/cxan.xml"
-cp    "$src/VERSION"            "$dest/content/"
-cp -R "$src/common"             "$dest/content/"
-cp -R "$src/epub"               "$dest/content/"
-cp -R "$src/epub3"              "$dest/content/"
-cp -R "$src/fo"                 "$dest/content/"
-cp -R "$src/highlighting"       "$dest/content/"
-cp -R "$src/html"               "$dest/content/"
-cp -R "$src/lib"                "$dest/content/"
-cp -R "$src/manpages"           "$dest/content/"
-cp -R "$src/params"             "$dest/content/"
-cp -R "$src/profiling"          "$dest/content/"
-cp -R "$src/template"           "$dest/content/"
-cp -R "$src/website"            "$dest/content/"
-cp -R "$src/xhtml"              "$dest/content/"
+ns=http://docbook.org/xsl
+abbrev=docbook-xsl
+pkg="$dest/expath-pkg.xml"
+
+echo "<package xmlns='http://expath.org/ns/pkg'" > $pkg;
+echo "         name='$ns'" >> $pkg;
+echo "         version='$num'" >> $pkg;
+echo "         abbrev='$abbrev'" >> $pkg;
+echo "         spec='1.0'>" >> $pkg;
+echo "   <title>XSLT stylesheets for DocBook $num.</title>" >> $pkg;
+echo "   <home>http://docbook.sourceforge.net/</home>" >> $pkg;
+echo "   <xslt>" >> $pkg;
+echo "      <import-uri>$ns/VERSION</import-uri>" >> $pkg;
+echo "      <file>VERSION</file>" >> $pkg;
+echo "   </xslt>" >> $pkg;
+
+for d in            \
+    common          \
+    epub            \
+    epub3           \
+    fo              \
+    highlighting    \
+    html            \
+    lib             \
+    manpages        \
+    params          \
+    profiling       \
+    template        \
+    website         \
+    xhtml
+do
+    mkdir "$dest/content/$d";
+    # dtd
+    for f in "$src/$d"/*.dtd; do
+        n=`basename $f`;
+        if [[ "$n" != '*.dtd' ]]; then
+            cp "$src/$d/$n" "$dest/content/$d/";
+	fi
+    done
+    # ent
+    for f in "$src/$d"/*.ent; do
+        n=`basename $f`;
+        if [[ "$n" != '*.ent' ]]; then
+            cp "$src/$d/$n" "$dest/content/$d/";
+	fi
+    done
+    # xml
+    for f in "$src/$d"/*.xml; do
+        n=`basename $f`;
+        if [[ "$n" != '*.xml' ]]; then
+            cp "$src/$d/$n" "$dest/content/$d/";
+	fi
+    done
+    # xsl
+    for f in "$src/$d"/*.xsl; do
+        n=`basename $f`;
+        if [[ "$n" != '*.xsl' ]]; then
+            cp "$src/$d/$n" "$dest/content/$d/";
+            echo "   <xslt>" >> $pkg;
+            echo "      <import-uri>$ns/$d/$n</import-uri>" >> $pkg;
+            echo "      <file>$d/$n</file>" >> $pkg;
+            echo "   </xslt>" >> $pkg;
+        fi
+    done
+done
+
+echo "</package>" >> $pkg;
 
 ( cd "$dest"; zip -r "docbook-xsl-${num}.xar" . )
 
