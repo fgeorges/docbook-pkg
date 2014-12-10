@@ -1,9 +1,9 @@
-<package xmlns='http://expath.org/ns/pkg'
-         name='http://docbook.org/schemas'
-         version='5.0'
-         abbrev='docbook-schemas'
-         spec='1.0'>
-   <title>Schemas for DocBook, 5.0</title>
+<package xmlns="http://expath.org/ns/pkg"
+         name="http://docbook.org/schemas"
+         version="{@VERSION}"
+         abbrev="docbook-schemas"
+         spec="1.0">
+   <title>Schemas for DocBook {@VERSION}</title>
    <home>http://docbook.org/</home>
    <nvdl>
       <import-uri>http://docbook.org/schemas/docbook.nvdl</import-uri>
