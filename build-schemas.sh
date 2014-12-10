@@ -34,12 +34,14 @@ dest=garbage/build
 mkdir "$dest"
 mkdir "$dest/content"
 
-cp    rsrc/docbook-schemas-pkg.xml  "$dest/expath-pkg.xml"
-cp    rsrc/docbook-schemas-cxan.xml "$dest/cxan.xml"
-cp    "$src/docbook.nvdl"           "$dest/content/"
-cp    "$src/sch/docbook.sch"        "$dest/content/"
-cp -R "$src/rng"                    "$dest/content/"
-cp -R "$src/xsd"                    "$dest/content/"
+sed "s/{@VERSION}/$num/g" rsrc/docbook-schemas-pkg.xml  > "$dest/expath-pkg.xml"
+sed "s/{@VERSION}/$num/g" rsrc/docbook-schemas-cxan.xml > "$dest/cxan.xml"
+
+cp    "$src/docbook.nvdl"    "$dest/content/"
+cp    "$src/dtd/docbook.dtd" "$dest/content/"
+cp    "$src/sch/docbook.sch" "$dest/content/"
+cp -R "$src/rng"             "$dest/content/"
+cp -R "$src/xsd"             "$dest/content/"
 
 ( cd "$dest"; zip -r "docbook-schemas-${num}.xar" . )
 
