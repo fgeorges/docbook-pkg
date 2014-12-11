@@ -1,6 +1,6 @@
 <package xmlns="http://cxan.org/ns/package" id="docbook-xsl">
    <abstract>
-      Stylesheets for DocBook.
+      Stylesheets for DocBook, with namespace support.
    </abstract>
    <author id="ndw">Norman Walsh</author>
    <maintainer id="fgeorges">Florent Georges</maintainer>
