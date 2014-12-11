@@ -30,6 +30,10 @@
       <file>rng/docbookxi.rng</file>
    </rng>
    <xsd>
+      <import-uri>http://docbook.org/schemas/docbook.xsd</import-uri>
+      <file>xsd/docbook.xsd</file>
+   </xsd>
+   <xsd>
       <namespace>http://docbook.org/ns/docbook</namespace>
       <file>xsd/docbook.xsd</file>
    </xsd>
