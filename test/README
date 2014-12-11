@@ -1,0 +1,21 @@
+To transform the XML article using Saxon, use either of the following
+(needs the package docbook-xsl-ns to be installed):
+
+    saxon -s:article.xml -xsl:http://docbook.org/xsl/xhtml/docbook.xsl
+    saxon -s:article.xml -xsl:docbook.xsl
+
+To validate using Calabash, use one of the following, depending on the
+schema language you want to validate with (needs the package
+docbook-schemas to be installed):
+
+    calabash -i source=article.xml validate-rng.xproc
+    calabash -i source=article.xml validate-sch.xproc
+    calabash -i source=article.xml validate-xsd.xproc
+
+To use locally installed packages, do:
+
+    xrepo create repo
+    xrepo --repo repo install ../dist/docbook-schemas-5.0.xar
+    xrepo --repo repo install ../dist/docbook-xsl-1.78.1.xar
+    saxon --repo repo -s:article.xml -xsl:docbook.xsl
+    calabash ++repo repo -i source=article.xml validate-rng.xproc
