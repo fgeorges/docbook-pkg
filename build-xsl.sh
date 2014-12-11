@@ -28,17 +28,36 @@ rm -rf garbage/*
 unzip "$zip" -d garbage/ >/dev/null
 
 src=`echo garbage/docbook-*/`
-num=`echo "$src" | sed -e 's|garbage/docbook-xsl-\(.*\)/|\1|'`
+if echo "$src" | grep -E '^garbage/docbook-xsl(-ns)?-(.+)/$'; then
+    true
+else
+    die "The dir name does not match known Docbook release pattern: $src"
+fi
+num=`echo "$src" | sed -Ee 's|garbage/docbook-xsl(-ns)?-(.+)/|\2|'`
+nons=`echo "$src" | sed -Ee 's|garbage/docbook-xsl(-ns)?-(.+)/|\1|'`
 dest=garbage/build
+
+#echo NUM : $num
+#echo NONS: $nons
+#die
 
 mkdir "$dest"
 mkdir "$dest/content"
 
-sed "s/{@VERSION}/$num/g" rsrc/docbook-xsl-cxan.xml > "$dest/cxan.xml"
-cp "$src/VERSION" "$dest/content/"
+if test "$nons" = "-ns"; then
+    cxan=rsrc/docbook-xsl-cxan.xml;
+    ns=http://docbook.org/xsl
+    abbrev=docbook-xsl
+else
+    cxan=rsrc/docbook-xsl-nons-cxan.xml;
+    ns=http://docbook.org/xsl-nons
+    abbrev=docbook-xsl-nons
+fi
 
-ns=http://docbook.org/xsl
-abbrev=docbook-xsl
+sed "s/{@VERSION}/$num/g" "$cxan" > "$dest/cxan.xml";
+cp "$src/VERSION"     "$dest/content/"
+cp "$src/VERSION.xsl" "$dest/content/"
+
 pkg="$dest/expath-pkg.xml"
 
 echo "<package xmlns='http://expath.org/ns/pkg'" > $pkg;
@@ -51,6 +70,10 @@ echo "   <home>http://docbook.sourceforge.net/</home>" >> $pkg;
 echo "   <xslt>" >> $pkg;
 echo "      <import-uri>$ns/VERSION</import-uri>" >> $pkg;
 echo "      <file>VERSION</file>" >> $pkg;
+echo "   </xslt>" >> $pkg;
+echo "   <xslt>" >> $pkg;
+echo "      <import-uri>$ns/VERSION.xsl</import-uri>" >> $pkg;
+echo "      <file>VERSION.xsl</file>" >> $pkg;
 echo "   </xslt>" >> $pkg;
 
 for d in            \
@@ -101,10 +124,11 @@ do
             echo "   </xslt>" >> $pkg;
         fi
     done
+    echo Done with subdir $d
 done
 
 echo "</package>" >> $pkg;
 
-( cd "$dest"; zip -r "docbook-xsl-${num}.xar" . )
+( cd "$dest"; zip -r "${abbrev}-${num}.xar" . )
 
 mv "$dest"/*.xar dist/
