@@ -1,10 +1,11 @@
 <package xmlns="http://cxan.org/ns/package" id="docbook-xsl-nons">
    <abstract>
-      Stylesheets for DocBook, with no namespace support.
+      Stylesheets for DocBook, NO namespace support.
    </abstract>
-   <author id="ndw">Norman Walsh</author>
+   <author id="nwalsh">Norman Walsh</author>
    <maintainer id="fgeorges">Florent Georges</maintainer>
-   <category id="applications">Applications</category>
+   <category id="doctypes">Document types</category>
+   <tag>doctype</tag>
    <tag>docbook</tag>
    <tag>xslt</tag>
 </package>
