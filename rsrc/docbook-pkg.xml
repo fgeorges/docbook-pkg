@@ -1,7 +1,7 @@
 <package xmlns="http://expath.org/ns/pkg"
          name="http://docbook.org/schemas"
          version="{@VERSION}"
-         abbrev="docbook-schemas"
+         abbrev="docbook"
          spec="1.0">
    <title>Schemas for DocBook {@VERSION}</title>
    <home>http://docbook.org/</home>

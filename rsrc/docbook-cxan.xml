@@ -1,4 +1,4 @@
-<package xmlns="http://cxan.org/ns/package" id="docbook-schemas">
+<package xmlns="http://cxan.org/ns/package" id="docbook">
    <abstract>
       Schemas for DocBook {@VERSION}.  Contains the W3C XML Schemas, the RELAX
       NG (XML and compact syntax) and the Schematron schemas, as well as the DTD.

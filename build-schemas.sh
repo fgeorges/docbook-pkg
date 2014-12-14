@@ -34,8 +34,8 @@ dest=garbage/build
 mkdir "$dest"
 mkdir "$dest/content"
 
-sed "s/{@VERSION}/$num/g" rsrc/docbook-schemas-pkg.xml  > "$dest/expath-pkg.xml"
-sed "s/{@VERSION}/$num/g" rsrc/docbook-schemas-cxan.xml > "$dest/cxan.xml"
+sed "s/{@VERSION}/$num/g" rsrc/docbook-pkg.xml  > "$dest/expath-pkg.xml"
+sed "s/{@VERSION}/$num/g" rsrc/docbook-cxan.xml > "$dest/cxan.xml"
 
 cp    "$src/docbook.nvdl"    "$dest/content/"
 cp -R "$src/dtd"             "$dest/content/"
@@ -43,6 +43,6 @@ cp -R "$src/sch"             "$dest/content/"
 cp -R "$src/rng"             "$dest/content/"
 cp -R "$src/xsd"             "$dest/content/"
 
-( cd "$dest"; zip -r "docbook-schemas-${num}.xar" . )
+( cd "$dest"; zip -r "docbook-${num}.xar" . )
 
 mv "$dest"/*.xar dist/
