@@ -38,8 +38,8 @@ sed "s/{@VERSION}/$num/g" rsrc/docbook-schemas-pkg.xml  > "$dest/expath-pkg.xml"
 sed "s/{@VERSION}/$num/g" rsrc/docbook-schemas-cxan.xml > "$dest/cxan.xml"
 
 cp    "$src/docbook.nvdl"    "$dest/content/"
-cp    "$src/dtd/docbook.dtd" "$dest/content/"
-cp    "$src/sch/docbook.sch" "$dest/content/"
+cp -R "$src/dtd"             "$dest/content/"
+cp -R "$src/sch"             "$dest/content/"
 cp -R "$src/rng"             "$dest/content/"
 cp -R "$src/xsd"             "$dest/content/"
 

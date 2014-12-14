@@ -9,9 +9,14 @@
       <import-uri>http://docbook.org/schemas/docbook.nvdl</import-uri>
       <file>docbook.nvdl</file>
    </nvdl>
+   <dtd>
+      <public-id>-//OASIS//DTD DocBook XML 5.0//EN</public-id>
+      <system-id>http://docbook.org/schemas/docbook.dtd</system-id>
+      <file>dtd/docbook.dtd</file>
+   </dtd>
    <schematron>
       <import-uri>http://docbook.org/schemas/docbook.sch</import-uri>
-      <file>docbook.sch</file>
+      <file>sch/docbook.sch</file>
    </schematron>
    <rnc>
       <import-uri>http://docbook.org/schemas/docbook.rnc</import-uri>
